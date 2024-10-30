@@ -20,7 +20,7 @@
 
       <!-- table card starts -->
       <div
-        class="mt-5 relative w-[430px] h-[200px] bg-[url('../assets/woodTex.jpg')] bg-cover rounded-md shadow-md shadow-slate-800"
+        class="mt-5 relative w-[380px] h-[200px] bg-[url('../assets/woodTex.jpg')] bg-cover rounded-md shadow-md shadow-slate-800"
       >
         <button
           :disabled="table.orderPlaced"
@@ -28,7 +28,7 @@
           :class="
             table.orderPlaced
               ? 'bg-gray-400 text-decoration-line-through'
-              : 'bg-[#fc0303]'
+              : 'bg-[#fc0306]'
           "
           class="absolute bottom-0 right-0 px-4 py-2 rounded-md mx-2 my-2 text-center font-semibold text-white"
         >
