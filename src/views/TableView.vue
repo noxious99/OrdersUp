@@ -20,43 +20,62 @@
 
       <!-- table card starts -->
       <div
-        class="mt-5 relative w-[430px] h-[200px] bg-[url('../assets/woodTex.jpg')] bg-cover rounded-md shadow-md shadow-slate-800"
+        class="mt-5 relative w-[380px] h-[200px] bg-[url('../assets/woodTex.jpg')] bg-cover rounded-md shadow-md shadow-slate-800"
       >
-        <button
-          :disabled="table.orderPlaced"
-          @click="assignTable(table.id), setPaymentFormShow"
-          :class="
-            table.orderPlaced
-              ? 'bg-gray-400 text-decoration-line-through'
-              : 'bg-[#fc0303]'
-          "
-          class="absolute bottom-0 right-0 px-4 py-2 rounded-md mx-2 my-2 text-center font-semibold text-white"
+        <div
+          v-if="table.paid"
+          class="absolute top-[40%] left-[15%] font-bold text-3xl text-red-800 [text-shadow:_1px_1px_10px_rgb(252_160_157_/_50%)]"
         >
-          Place Order to this Table
-        </button>
-        <div class="absolute top-0 left-0 mx-3 my-3 flex justify-evenly gap-5">
-          <p class="text-white font-bold text-lg">Table No. {{ table.id }}</p>
-          <p class="text-white font-bold text-lg">
-            Order No.
-            {{ table.orderPlaced ? this.$store.state.myOrder.orderId : "none" }}
-          </p>
-          <p class="text-white font-bold text-lg">
-            Due: {{ table.orderPlaced ? this.$store.state.totalPay : "0" }}
-          </p>
+          Enjoy Your Food!
         </div>
-        <div class="absolute top-[40%] left-[15%]">
-          <div v-if="table.orderPlaced" class="flex flex-row gap-2">
-            <input
-              type="text"
-              placeholder="Insert amount 500tk"
-              class="bg-gray-200 px-4 py-2 rounded-lg"
-            />
-            <button
-              @click="completeOrder(table.id)"
-              class="bg-[#fc0303] px-4 py-2 text-white rounded-md font-bold"
+        <div v-else>
+          <button
+            :disabled="table.orderPlaced"
+            @click="assignTable(table.id), setPaymentFormShow"
+            :class="
+              table.orderPlaced
+                ? 'bg-gray-400 text-decoration-line-through'
+                : 'bg-[#fc0309]'
+            "
+            class="absolute bottom-0 right-0 px-4 py-2 rounded-md mx-2 my-2 text-center font-semibold text-white"
+          >
+            Place Order to this Table
+          </button>
+          <div
+            class="absolute top-0 left-0 mx-3 my-3 flex justify-evenly gap-5"
+          >
+            <p
+              class="text-white font-bold text-lg [text-shadow:_1px_1px_10px_rgb(0_0_0_/_80%)]"
             >
-              Pay
-            </button>
+              Table No. {{ table.id }}
+            </p>
+            <p
+              class="text-white font-bold text-lg [text-shadow:_1px_1px_10px_rgb(0_0_0_/_80%)]"
+            >
+              Order No.
+              {{ table.orderPlaced ? table.orderNo : "none" }}
+            </p>
+            <p
+              class="text-white font-bold text-lg [text-shadow:_1px_1px_10px_rgb(0_0_0_/_80%)]"
+            >
+              Due: {{ table.orderPlaced ? table.due : "0" }}
+            </p>
+          </div>
+          <div class="absolute top-[40%] left-[15%]">
+            <div v-if="table.orderPlaced" class="flex flex-row gap-2">
+              <input
+                type="text"
+                placeholder="Insert amount 500tk"
+                :value="table.due"
+                class="bg-gray-200 px-4 py-2 rounded-lg"
+              />
+              <button
+                @click="completeOrder(table.id)"
+                class="bg-[#fc0303] px-4 py-2 text-white rounded-md font-bold"
+              >
+                Pay
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -8,36 +8,42 @@ export default createStore({
             orderNo : 0,
             paid: false,
             orderPlaced: false,
+            due:0
         },
         {
           id: 2,
           orderNo : 0,
           paid: false,
-          orderPlaced: false
+          orderPlaced: false,
+          due: 0
         },
         {
           id: 3,
           orderNo : 0,
           paid: false,
-          orderPlaced: false
+          orderPlaced: false,
+          due: 0
         },
         {
           id: 4,
           orderNo : 0,
           paid: false,
-          orderPlaced: false
+          orderPlaced: false,
+          due: 0
         },
         {
           id: 5,
           orderNo : 0,
           paid: false,
-          orderPlaced: false
+          orderPlaced: false,
+          due: 0
         },
         {
           id: 6,
           orderNo : 0,
           paid: false,
-          orderPlaced: false
+          orderPlaced: false,
+          due: 0
         },
     ],
     items: [
@@ -101,16 +107,16 @@ export default createStore({
         state.myOrder.AmountNotPaid = state.totalPay;
     },
     tableAssign(state, tableId) {
-      state.table = state.tables.map(table => table.id === tableId? {...table.orderNo = state.myOrder.orderId, ...table.orderPlaced = true} : table)
+        state.table = state.tables.map(table => table.id === tableId? {...table.orderNo = state.myOrder.orderId, ...table.orderPlaced = true, ...table.due = state.totalPay} : table)
     },
     completeOrder(state, tableId ){
       const orderCompleteState = {
         orderId : state.myOrder.orderId,
         fooditem: state.currentOrder,
         price: state.totalPay,
-        assignTable: tableId
+        assignTable: tableId,
       }
-
+      state.table = state.tables.map(table => table.id === tableId? {...table.due = 0, ...table.paid = true} : table)
       state.orderList.push(orderCompleteState);
       console.log(JSON.stringify(state.orderList))
       localStorage.setItem("Orders", JSON.stringify(state.orderList))
