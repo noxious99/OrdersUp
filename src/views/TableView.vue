@@ -28,7 +28,7 @@
           :class="
             table.orderPlaced
               ? 'bg-gray-400 text-decoration-line-through'
-              : 'bg-[#fc0306]'
+              : 'bg-[#fc0309]'
           "
           class="absolute bottom-0 right-0 px-4 py-2 rounded-md mx-2 my-2 text-center font-semibold text-white"
         >
