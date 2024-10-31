@@ -29,7 +29,7 @@
           <p class="text-h6">x{{ item.quantity }}</p>
           <button
             @click="increaseQuantity(item.id)"
-            class="ml-2 bg-green-700 w-6 h-6 text-white rounded-xl font-bold"
+            class="ml-2 bg-green-600 w-6 h-6 text-white rounded-xl font-bold"
           >
             +
           </button>
@@ -50,7 +50,9 @@
     </div>
     <div class="flex gap-2 items-center">
       <p>Total Amount to Pay:</p>
-      <p class="font-italic text-h6 text-[#fc0303] font-weight-bold">
+      <p
+        class="font-italic text-h6 text-[#fc0303] font-weight-bold [text-shadow:_0_1px_2px_rgb(0_0_0_/_40%)]"
+      >
         {{ totalValue }}/= (vat 15%)
       </p>
     </div>

@@ -1,15 +1,25 @@
 <template>
-  <div
-    class="flex flex-col md:flex-row md:items-start md:gap-[100px] gap-[60px] mt-5 justify-center items-center"
-  >
-    <div class="font-weight-bold w-[380px] md:w-[500px] text-center">
+  <div class="h-[100vh]">
+    <div class="mb-5">
       <p
-        class="text-xl text-white bg-[#fc0303] py-5 px-6 rounded-md elevation-1"
+        class="text-black font-bold backdrop-blur-lg text-6xl px-10 py-5 [text-shadow:_0_2px_3px_rgb(0_0_0_/_60%)]"
       >
-        MY ORDER
+        Orders Up!
       </p>
-      <CurrentOrder />
-      <!-- <div v-if="Object.keys(this.$store.state.myOrder).length > 0">
+    </div>
+    <div
+      class="flex flex-col md:flex-row md:items-start md:gap-[100px] gap-[60px] mt-5 justify-center items-center"
+    >
+      <div
+        class="font-weight-bold w-[380px] md:w-[500px] text-center backdrop-blur-sm px-5"
+      >
+        <p
+          class="text-xl text-white bg-[#fc0303] py-5 px-6 rounded-md elevation-1"
+        >
+          MY ORDER
+        </p>
+        <CurrentOrder />
+        <!-- <div v-if="Object.keys(this.$store.state.myOrder).length > 0">
         <div class="flex gap-2">
           <p>Order Id:</p>
           <p>
@@ -28,60 +38,62 @@
           </p>
         </div>
       </div> -->
-    </div>
+      </div>
 
-    <div class="font-weight-bold w-[380px] md:w-[500px]">
-      <v-btn
-        block
-        style="
-          color: white;
-          height: 70px;
-          background-color: red;
-          font-size: 18px;
-          font-weight: 700;
-        "
-      >
-        Chose Your Food Item!!
-        <v-menu activator="parent">
-          <v-list>
-            <v-list-item
-              v-for="item in items"
-              :key="item.id"
-              :value="item.id"
-              class="my-2"
-            >
-              <!-- <v-list-item-title>{{ item.title }}</v-list-item-title> -->
-              <div class="d-flex items-center py-2">
-                <div class="mr-5">
-                  <v-img
-                    :width="60"
-                    :height="60"
-                    cover
-                    :src="item.image"
-                    class="rounded-xl"
-                  ></v-img>
-                </div>
-                <div>
-                  <div class="text-lg">{{ item.title }}</div>
-                  <div class="text-lg">
-                    <p class="font-italic">$: {{ item.price }}</p>
+      <div class="font-weight-bold w-[380px] md:w-[500px] h-100">
+        <v-btn
+          block
+          style="
+            color: white;
+            height: 68px;
+            background-color: #fc0303;
+            font-size: 20px;
+            font-weight: 900;
+          "
+        >
+          Choose Your Food Item!!
+          <v-menu activator="parent">
+            <v-list class="bg-grey-lighten-4">
+              <v-list-item
+                v-for="item in items"
+                :key="item.id"
+                :value="item.id"
+                class="my-2"
+              >
+                <!-- <v-list-item-title>{{ item.title }}</v-list-item-title> -->
+                <div class="d-flex items-center py-2">
+                  <div class="mr-5">
+                    <v-img
+                      :width="60"
+                      :height="60"
+                      cover
+                      :src="item.image"
+                      class="rounded-xl"
+                    ></v-img>
+                  </div>
+                  <div>
+                    <div class="text-lg">{{ item.title }}</div>
+                    <div class="text-lg">
+                      <p class="font-italic">$: {{ item.price }}</p>
+                    </div>
+                  </div>
+                  <div
+                    class="ml-10 bg-green-600 px-3 py-1 text-white rounded-lg"
+                  >
+                    <button
+                      @click="$store.commit('addToOrder', item)"
+                      class="text-h5 font-weight-bold"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
-                <div class="ml-10 bg-green-700 px-3 py-1 text-white rounded-lg">
-                  <button
-                    @click="$store.commit('addToOrder', item)"
-                    class="text-h5 font-weight-bold"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </v-btn>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-btn>
 
-      <!-- <div
+        <!-- <div
         class="mt-5 relative w-[400px] h-[200px] bg-[url('../assets/woodTex.jpg')] bg-cover rounded-md"
       >
         <button
@@ -106,6 +118,7 @@
           </div>
         </div>
       </div> -->
+      </div>
     </div>
   </div>
 </template>
