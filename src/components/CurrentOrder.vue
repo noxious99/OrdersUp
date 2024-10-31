@@ -22,7 +22,7 @@
         <div class="d-flex align-center my-1">
           <button
             @click="decreaseQuantity(item.id)"
-            class="mr-2 bg-red-700 px-2 h-6 w-6 text-white rounded-xl font-bold"
+            class="mr-2 bg-[#fc0303] px-2 h-6 w-6 text-white rounded-xl font-bold"
           >
             -
           </button>
@@ -42,12 +42,18 @@
   </div>
   <div
     v-if="totalValue > 0"
-    class="flex gap-2 justify-center items-center text-white"
+    class="flex flex-col gap-2 justify-center items-start ml-5 mt-5 mb-5 text-black"
   >
-    <p>Total Amount to Pay:</p>
-    <p class="font-italic text-h6 text-red-600 font-weight-bold">
-      {{ totalValue }}/=
-    </p>
+    <div class="flex gap-2 items-center">
+      <p>Cost of Food :</p>
+      <p class="font-bold text-xl">{{ foodCost }}/=</p>
+    </div>
+    <div class="flex gap-2 items-center">
+      <p>Total Amount to Pay:</p>
+      <p class="font-italic text-h6 text-[#fc0303] font-weight-bold">
+        {{ totalValue }}/= (vat 15%)
+      </p>
+    </div>
   </div>
   <div
     v-if="totalValue > 0"
@@ -63,6 +69,12 @@
       </button></RouterLink
     >
   </div>
+  <div
+    v-if="totalValue > 0"
+    class="px-4 py-2 bg-[#fc0303] transition-all duration-200 hover:bg-green-900 text-white rounded-sm elevation-2 my-2"
+  >
+    <button @click="this.$store.commit('resetOrder')">Reset Order</button>
+  </div>
 </template>
 
 <script>
@@ -73,6 +85,9 @@ export default {
     },
     totalValue() {
       return this.$store.getters.totalPay;
+    },
+    foodCost() {
+      return this.$store.getters.foodCost;
     },
   },
   methods: {
@@ -94,7 +109,6 @@ export default {
         });
       }
     },
-    confirmOrder() {},
   },
 };
 </script>

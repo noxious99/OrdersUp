@@ -100,7 +100,7 @@ export default createStore({
         state.currentOrder.forEach((item) => {
           sum += item.price * item.quantity;
         });
-        state.totalPay = sum;
+        state.totalPay = Math.floor(sum + (sum * .15));
     },
     confirmOrder(state) {
         state.myOrder.orderId = Math.floor(Math.random() * 10000000000);
@@ -113,13 +113,16 @@ export default createStore({
       const orderCompleteState = {
         orderId : state.myOrder.orderId,
         fooditem: state.currentOrder,
-        price: state.totalPay,
+        price: Math.floor(state.totalPay),
         assignTable: tableId,
       }
       state.table = state.tables.map(table => table.id === tableId? {...table.due = 0, ...table.paid = true} : table)
       state.orderList.push(orderCompleteState);
       console.log(JSON.stringify(state.orderList))
       localStorage.setItem("Orders", JSON.stringify(state.orderList))
+    },
+    resetOrder(state) {
+      state.currentOrder = []
     }
   },
   actions: {
@@ -130,7 +133,14 @@ export default createStore({
         state.currentOrder.forEach((item) => {
           sum += item.price * item.quantity;
         });
-        return sum;
+        return Math.floor(sum + (sum * .15));
+    },
+    foodCost(state) {
+      let sum = 0;
+      state.currentOrder.forEach((item) => {
+        sum += item.price * item.quantity;
+      });
+      return sum;
     }
   },
   modules: {},
